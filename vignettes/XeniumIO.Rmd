@@ -145,17 +145,34 @@ into R. The `TENxXenium` object is created by specifying the path to the
 `xeniumOut` folder. The `TENxXenium` object is then imported into R using the
 `import` method for the `TENxXenium` class.
 
+First, we cache the ~12 MB file to avoid downloading it multiple times (via 
+`r Biocpkg("BiocFileCache")`).
+
 ```{r}
 zipfile <- paste0(
     "https://mghp.osn.xsede.org/bir190004-bucket01/BiocXenDemo/",
     "Xenium_Prime_MultiCellSeg_Mouse_Ileum_tiny_outs.zip"
 )
 destfile <- XeniumIO:::.cache_url_file(zipfile)
+```
+
+We then create an output folder for the contents of the zipped file. We use the
+same name as the zip file but without the extension (with
+`tools::file_path_sans_ext`).
+
+```{r}
 outfold <- file.path(
     tempdir(), tools::file_path_sans_ext(basename(zipfile))
 )
 if (!dir.exists(outfold))
     dir.create(outfold, recursive = TRUE)
+```
+
+We now unzip the file and use the `outfold` as the `exdir` argument to `unzip`.
+The `outfold` variable and folder will be used as the `xeniumOut` argument in
+the `TENxXenium` constructor.
+
+```{r}
 unzip(
     zipfile = destfile, exdir = outfold, overwrite = FALSE
 )
