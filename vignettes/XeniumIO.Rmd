@@ -170,15 +170,32 @@ if (!dir.exists(outfold))
 
 We now unzip the file and use the `outfold` as the `exdir` argument to `unzip`.
 The `outfold` variable and folder will be used as the `xeniumOut` argument in
-the `TENxXenium` constructor.
+the `TENxXenium` constructor. Note that we use the `ref = "Gene Expression"`
+argument in the `import` method to pass down to the internal `splitAltExps`
+function call. This will set the `mainExpName` in the `SpatialExperiment`
+object.
 
 ```{r}
 unzip(
     zipfile = destfile, exdir = outfold, overwrite = FALSE
 )
 TENxXenium(xeniumOut = outfold) |>
-    import()
+    import(ref = "Gene Expression")
 ```
+
+Note that you may also use the `swapAltExp` function to set a `mainExpName` in
+the `SpatialExperiment` but this is not recommended. The operation returns a
+`SingleCellExperiment` which has to be coerced back into a `SpatialExperiment`.
+The coercion also loses some metadata information particularly the
+`spatialCoords`.
+
+```{r}
+TENxXenium(xeniumOut = outfold) |>
+    import() |>
+    swapAltExp(name = "Gene Expression") |>
+    as("SpatialExperiment")
+```
+
 
 The dataset was obtained from the 10X Genomics website under the
 [X0A v3.0 section](https://www.10xgenomics.com/support/software/xenium-onboard-analysis/latest/resources/xenium-example-data#test-data-v3-0)

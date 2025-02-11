@@ -62,6 +62,11 @@ This class is a composed class of
 \link[TENxIO:TENxFile-class]{TENxFile} objects for the cell-feature matrix. It
 is meant to handle a single Xenium sample from 10X Genomics.
 }
+\details{
+Note that one can provide a \code{ref} argument to \code{import} method which
+will get passed to the internal \code{splitAltExps} operation. This allows one
+to set a \code{mainExpName} in the output object.
+}
 \section{Functions}{
 \itemize{
 \item \code{import(con = TENxXenium, format = ANY, text = ANY)}: Import Xenium Analyzer data
@@ -108,7 +113,7 @@ unzip(
     zipfile = destfile, exdir = outfold, overwrite = FALSE
 )
 TENxXenium(xeniumOut = outfold) |>
-    import()
+    import(ref = "Gene Expression")
 }
 \seealso{
 \url{https://www.10xgenomics.com/support/software/xenium-onboard-analysis/latest/analysis/xoa-output-understanding-outputs}

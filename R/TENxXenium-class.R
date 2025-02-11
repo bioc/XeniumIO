@@ -74,6 +74,10 @@ setClassUnion(
 #' @param boundaries_format `character(1)` Either "parquet" or "csv.gz" to
 #'   specify the file extension of the boundaries file. Default is "parquet".
 #'
+#' @details Note that one can provide a `ref` argument to `import` method which
+#'   will get passed to the internal `splitAltExps` operation. This allows one
+#'   to set a `mainExpName` in the output object.
+#'
 #' @importFrom methods is new
 #' @importFrom BiocBaseUtils isScalarCharacter
 #'
@@ -92,7 +96,7 @@ setClassUnion(
 #'     zipfile = destfile, exdir = outfold, overwrite = FALSE
 #' )
 #' TENxXenium(xeniumOut = outfold) |>
-#'     import()
+#'     import(ref = "Gene Expression")
 #' @export
 TENxXenium <- function(
     resources,
