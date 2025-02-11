@@ -39,7 +39,7 @@ specify the file extension of the boundaries file. Default is "parquet".}
 names of the columns in the spatial data containing the spatial coordinates.}
 
 \item{...}{In the constructor, additional arguments passed to
-\code{\link[=TENxFileList]{TENxFileList()}}; otherwise, not used.}
+\link[TENxIO:TENxFileList-class]{TENxFileList}; otherwise, not used.}
 
 \item{con}{The connection from which data is loaded or to which data is
 saved. If this is a \code{character} vector, it is assumed to be a file name and
