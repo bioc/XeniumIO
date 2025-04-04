@@ -1,3 +1,3 @@
-# XeniumIO 0.99.3
+## Changes in version 1.0.0
 
-* Initial Bioconductor submission.
+* Package released in Bioconductor!
