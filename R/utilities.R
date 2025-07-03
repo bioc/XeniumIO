@@ -87,7 +87,7 @@
     ## only re-download manually b/c bfcneedsupdate always returns TRUE
     if (identical(nrow(bquery), 1L) && redownload)
         BiocFileCache::bfcdownload(
-            x = bfc, rid = bquery[["rid"]], rtype = "web", ask = FALSE
+            x = bfc, rid = bquery[["rid"]], ask = FALSE
         )
 
     BiocFileCache::bfcrpath(
