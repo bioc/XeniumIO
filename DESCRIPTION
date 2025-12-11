@@ -25,7 +25,7 @@ Imports:
     SingleCellExperiment,
     SpatialExperiment,
     SummarizedExperiment,
-    VisiumIO
+    VisiumIO (>= 1.7.5)
 Suggests:
     arrow,
     BiocFileCache,
