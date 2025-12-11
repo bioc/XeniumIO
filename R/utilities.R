@@ -67,7 +67,7 @@
 }
 
 .boundaries_for_format <- function(fdir, fileext) {
-    fname <- paste0("cells", ".", fileext)
+    fname <- paste0("cell_boundaries", ".", fileext)
     cellsf <- file.path(fdir, fname)
     if (!file.exists(cellsf))
         stop("The '", basename(cellsf), "' file was not found.")
