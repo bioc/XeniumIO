@@ -14,7 +14,7 @@ output:
 package: XeniumIO
 ---
 
-```{r,include=FALSE}
+```{r setup,include=FALSE}
 knitr::opts_chunk$set(cache = TRUE)
 ```
 
@@ -59,7 +59,7 @@ into R.
 
 # Installation
 
-```{r,eval=FALSE}
+```{r install-package,eval=FALSE}
 if (!require("BiocManager", quietly = TRUE))
     install.packages("BiocManager")))
 
@@ -68,7 +68,7 @@ BiocManager::install("XeniumIO")
 
 # Loading package
 
-```{r,include=TRUE,results="hide",message=FALSE,warning=FALSE}
+```{r load-package,include=TRUE,results="hide",message=FALSE,warning=FALSE}
 library(XeniumIO)
 ```
 
@@ -80,7 +80,7 @@ feature matrix. The `coordNames` slot is a vector specifying the names of the
 columns in the spatial data containing the spatial coordinates. The `sampleId`
 slot is a scalar specifying the sample identifier.
 
-```{r, eval=FALSE}
+```{r tenxxenium-constructor, eval=FALSE}
 TENxXenium(
     resources = "path/to/matrix/folder/or/file",
     xeniumOut = "path/to/xeniumOut/folder",
@@ -125,7 +125,7 @@ a `TENxH5` instance from an `h5` file. The boundaries can either be a
 `TENxSpatialParquet` instance or a `TENxSpatialCSV`. These classes are
 automatically instantiated by the constructor function.
 
-```{r}
+```{r show-class}
 showClass("TENxXenium")
 ```
 
@@ -136,7 +136,7 @@ class object. Dispatch is only done on the `con` argument. See `?BiocIO::import`
 for details on the generic. The `import` function call is meant to be a simple
 call without much input. For more details in the package, see `?TENxXenium`.
 
-```{r}
+```{r show-import-method}
 getMethod("import", c(con = "TENxXenium"))
 ```
 
@@ -151,7 +151,7 @@ into R. The `TENxXenium` object is created by specifying the path to the
 First, we cache the ~12 MB file to avoid downloading it multiple times (via 
 `r BiocStyle::Biocpkg("BiocFileCache")`).
 
-```{r}
+```{r cache-zipfile}
 zipfile <- paste0(
     "https://mghp.osn.xsede.org/bir190004-bucket01/BiocXenDemo/",
     "Xenium_Prime_MultiCellSeg_Mouse_Ileum_tiny_outs.zip"
@@ -163,7 +163,7 @@ We then create an output folder for the contents of the zipped file. We use the
 same name as the zip file but without the extension (with
 `tools::file_path_sans_ext`).
 
-```{r}
+```{r create-output-folder}
 outfold <- file.path(
     tempdir(), tools::file_path_sans_ext(basename(zipfile))
 )
@@ -178,7 +178,7 @@ argument in the `import` method to pass down to the internal `splitAltExps`
 function call. This will set the `mainExpName` in the `SpatialExperiment`
 object.
 
-```{r}
+```{r unzip-and-import}
 unzip(
     zipfile = destfile, exdir = outfold, overwrite = FALSE
 )
@@ -192,7 +192,7 @@ the `SpatialExperiment` but this is not recommended. The operation returns a
 The coercion also loses some metadata information particularly the
 `spatialCoords`.
 
-```{r}
+```{r import-and-swap}
 TENxXenium(xeniumOut = outfold) |>
     import() |>
     swapAltExp(name = "Gene Expression") |>
