@@ -120,8 +120,8 @@ currently under development.
 
 ## Xenium class
 
-The `resources` slot should either be the `TENxFileList` from the `mtx` format or
-a `TENxH5` instance from an `h5` file. The boundaries can either be a
+The `resources` slot should either be the `TENxFileList` from the `mtx` format
+or a `TENxH5` instance from an `h5` file. The boundaries can either be a
 `TENxSpatialParquet` instance or a `TENxSpatialCSV`. These classes are
 automatically instantiated by the constructor function.
 
