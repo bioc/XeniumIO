@@ -7,7 +7,8 @@ Authors@R: c(
         c(ORCID = "0000-0002-3242-0582")
     ),
     person("Dario", "Righelli", role = "ctb"),
-    person("Estella", "Dong", role = "ctb")
+    person("Estella", "Dong", role = "ctb"),
+    person("NCI", role = "fnd", comment = c(GrantNo. = "U24CA289073"))
     )
 Description: The package allows users to readily import spatial data
     obtained from the 10X Xenium Analyzer pipeline. Supported formats include
